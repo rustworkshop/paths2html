@@ -7,23 +7,23 @@ fn main() {
     let stdout = io::stdout();
     let mut stdout = stdout.lock();
 
-    let html_top = "
-<!DOCTYPE html><html><head><style type=\"text/css\">
+    let html_top = r#"
+<!DOCTYPE html><html><head><style type="text/css">
      * { font-family: monospace; }
      .folder {color: blue; cursor: pointer;}
      .collapsed li { display: none; }
 </style></head><body>
-";
-    let html_tail = "
-<script type=\"text/javascript\">
-     document.querySelectorAll(\".folder\").forEach((folder) => {
-         folder.parentElement.classList.toggle(\"expando\");
-         folder.addEventListener(\"click\", (event) => {
-             event.target.parentElement.classList.toggle(\"collapsed\");
+"#;
+    let html_tail = r#"
+<script type="text/javascript">
+     document.querySelectorAll(".folder").forEach((folder) => {
+         folder.parentElement.classList.toggle("expando");
+         folder.addEventListener("click", (event) => {
+             event.target.parentElement.classList.toggle("collapsed");
          });
      });
 </script></body></html>
-";
+"#;
     write!(stdout, "{}", html_top).expect(STDOUT_ERROR);
     write_all(stdin.lock(), &mut stdout);
     write!(stdout, "{}", html_tail).expect(STDOUT_ERROR);
