@@ -28,7 +28,7 @@ document.querySelectorAll(".folder").forEach((folder) => {
 <footer><div>Generated with <a href="https://github.com/timabell/paths2html">github.com/timabell/paths2html</a>.</div></footer>
 </body></html>
 "#;
-    
+
     write!(stdout, "{}", html_top).expect(STDOUT_ERROR);
     write_all(stdin.lock(), &mut stdout);
     write!(stdout, "{}", html_tail).expect(STDOUT_ERROR);
@@ -36,7 +36,10 @@ document.querySelectorAll(".folder").forEach((folder) => {
 
 // for file paths received on stdout, writes a nested tree of html list nodes
 fn write_all<R, W>(reader: R, mut writer: W)
-where R: BufRead, W: Write{
+where
+    R: BufRead,
+    W: Write,
+{
     write!(writer, "<ul>").expect(STDOUT_ERROR);
     let mut previous_folder_path = vec![];
     for line in reader.lines() {
@@ -58,17 +61,26 @@ where R: BufRead, W: Write{
     write!(writer, "</ul>").expect(STDOUT_ERROR);
 }
 
-fn open_subfolders<W>(writer: &mut W, new_subfolders: &[String]) where W: Write{
+fn open_subfolders<W>(writer: &mut W, new_subfolders: &[String])
+where
+    W: Write,
+{
     for folder in new_subfolders.iter() {
         write!(writer, "<li><span class='folder'>{}</span><ul>\n", folder).expect(STDOUT_ERROR);
     }
 }
 
-fn write_file<W>(stdout: &mut W, file: String) where W: Write {
+fn write_file<W>(stdout: &mut W, file: String)
+where
+    W: Write,
+{
     write!(stdout, "<li>{}</li>\n", file).expect(STDOUT_ERROR);
 }
 
-fn close_folders<W>(writer: &mut W, previous_folder_levels_to_close: usize) where W: Write {
+fn close_folders<W>(writer: &mut W, previous_folder_levels_to_close: usize)
+where
+    W: Write,
+{
     for _ in 0..previous_folder_levels_to_close {
         write!(writer, "</ul>").expect(STDOUT_ERROR);
     }
@@ -100,7 +112,7 @@ mod tests {
     use test_case::test_case;
 
     #[test]
-    fn test_write_all(){
+    fn test_write_all() {
         let input = b"x/a\nx/b\nc\n";
         let expected_output = "<ul><li><span class='folder'>x</span><ul>
 <li>a</li>
