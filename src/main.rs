@@ -9,21 +9,26 @@ fn main() {
 
     let html_top = r#"
 <!DOCTYPE html><html><head><style type="text/css">
-     * { font-family: monospace; }
-     .folder {color: blue; cursor: pointer;}
-     .collapsed li { display: none; }
+*{font-family:monospace;}
+.folder {color:blue; cursor:pointer;}
+.collapsed li {display:none;}
+footer {margin-top:2em;font-size:0.8em;border-top:1px solid #666;padding-top:1em;opacity:0.6;text-align:right;}
 </style></head><body>
 "#;
+
     let html_tail = r#"
 <script type="text/javascript">
-     document.querySelectorAll(".folder").forEach((folder) => {
-         folder.parentElement.classList.toggle("expando");
-         folder.addEventListener("click", (event) => {
-             event.target.parentElement.classList.toggle("collapsed");
-         });
-     });
-</script></body></html>
+document.querySelectorAll(".folder").forEach((folder) => {
+    folder.parentElement.classList.toggle("expando");
+    folder.addEventListener("click", (event) => {
+        event.target.parentElement.classList.toggle("collapsed");
+    });
+});
+</script>
+<footer><div>Generated with <a href="https://github.com/timabell/paths2html">github.com/timabell/paths2html</a>.</div></footer>
+</body></html>
 "#;
+    
     write!(stdout, "{}", html_top).expect(STDOUT_ERROR);
     write_all(stdin.lock(), &mut stdout);
     write!(stdout, "{}", html_tail).expect(STDOUT_ERROR);
