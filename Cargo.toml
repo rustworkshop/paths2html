@@ -7,6 +7,5 @@ edition = "2021"
 
 [dependencies]
 
-[[bin]]
-name = "paths2html"
-path = "paths2html.rs"
+[dev-dependencies]
+test-case = "3.1.0"
