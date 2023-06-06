@@ -2,6 +2,8 @@ Pipe a list of file paths to this program and it will generate an html file with
 
 This makes it easy to take a massive file list and collapse things that you've looked at or that aren't interesting.
 
+![recoding of clicking on html nodes](paths2html-screencast.gif)
+
 
 This is going to be used to be able to more quickly eyeball md5deep verification output.
 
