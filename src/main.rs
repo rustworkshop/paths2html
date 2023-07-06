@@ -12,6 +12,7 @@ fn main() {
 *{font-family:monospace;}
 .folder {color:blue; cursor:pointer;}
 .collapsed li {display:none;}
+.collapsed .folder::after { content: ' …'; }
 footer {margin-top:2em;font-size:0.8em;border-top:1px solid #666;padding-top:1em;opacity:0.6;text-align:right;}
 </style></head><body>
 "#;
