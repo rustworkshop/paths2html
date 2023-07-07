@@ -28,12 +28,25 @@ into this:
 
 ## Usage
 
+### Pipe results of `find`
+
+```bash
+find . -iname '*.pdf' | sort | paths2html > /tmp/tree.html \
+   && xdg-open /tmp/tree.html
+```
+
+### Looks for AWOL hashes in md5deep output
+
 ```bash
 grep "Known file not used" ~/Documents/hashdeep-checksums-verification.txt \
   | sed 's/:.*//'| paths2html \
   | tee tmp.html \
   && xdg-open tmp.html
 ```
+
+### Suggestions?
+
+Found a cool use for it? Let me know, open a PR on the readme, star the repo, drop me a line etc.
 
 ## md5sum verification
 
